@@ -7,7 +7,7 @@ public class Driver{
     Random rand = new Random();
 
     for (int i = 0; i < numList.length; i++){
-      numList[i] = rand.nextInt(100000);
+      numList[i] = rand.nextInt(10000);
     }
 
     String[] names = new String[10];
@@ -33,11 +33,15 @@ public class Driver{
     friends[6] = new Contact("David", "Miller", "789-012-3456");
     friends[7] = new Contact("James", "Brown", "235-426-1360");
 
-    Sorting.insertionSort(friends);
+    Sorting.quickSort2(numList, 0, numList.length - 1);
 
-    for (Contact friend : friends) {
-      System.out.println(friend);
+    for (int num : numList){
+      System.out.println(num);
     }
+
+    // for (Contact friend : friends) {
+    //   System.out.println(friend);
+    // }
 
 
     // System.out.println(Searching.linearSearch(numList, 0, 9, 2030));
