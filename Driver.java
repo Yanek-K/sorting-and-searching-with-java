@@ -33,10 +33,13 @@ public class Driver{
     friends[6] = new Contact("David", "Miller", "789-012-3456");
     friends[7] = new Contact("James", "Brown", "235-426-1360");
 
-    Sorting.quickSort2(numList, 0, numList.length - 1);
-
-    for (int num : numList){
-      System.out.println(num);
+    // Sorting.quickSort(numList, 0, numList.length - 1);
+    Sorting.insertionSort(friends);
+    // for (int num : numList){
+    //   System.out.println(num);
+    // }
+    for (Contact friend : friends){
+      System.out.println(friend);
     }
 
     // for (Contact friend : friends) {

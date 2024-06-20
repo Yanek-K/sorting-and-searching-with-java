@@ -24,8 +24,10 @@ public class Sorting {
       while (position > 0 && data[position - 1].compareTo(key) > 0) {
         data[position] = data[position - 1];
         position--;
+        System.out.println("here");
       }
       data[position] = key;
+      System.out.println("Here now");
     }
   }
 
@@ -41,38 +43,45 @@ public class Sorting {
     }
   }
 
-  public static <T extends Comparable<T>> void quickSort2(T[] array, int lowIndex, int highIndex){
+  public static <T extends Comparable<T>> void quickSort(T[] data, int min, int max){
+    if (min < max) {
+      // Create Partitions
 
-    if (lowIndex >= highIndex) {
-      return;
+      int indexOfPartition = partition(data, min, max);
+      
+      // Sort the left partition
+      quickSort(data, min, indexOfPartition - 1);
+
+      // Sort the right partition
+      quickSort(data, indexOfPartition + 1, max);
     }
-
-    T pivot = array[highIndex];
-
-    int leftPointer = partition(array, lowIndex, highIndex, pivot);
-
-    quickSort2(array, lowIndex, leftPointer - 1);
-    quickSort2(array, leftPointer + 1, highIndex);
   }
 
-  private static <T extends Comparable<T>> int partition(int[] array, int lowIndex, int highIndex, T pivot) {
+  private static <T extends Comparable<T>> int partition(T[] data, int min, int max){
 
-    int leftPointer = lowIndex;
-    int rightPointer = highIndex;
+    T partitionElement;
+    int left, right;
+    int middle = (min + max) / 2;
 
-    while (leftPointer < rightPointer) {
-      while (array[leftPointer].compareTo(pivot) < 0 && leftPointer < rightPointer) {
-        leftPointer++;
-      }
+    partitionElement = data[middle];
 
-      while (array[rightPointer].compareTo(pivot) >= 0 && leftPointer < rightPointer) {
-        rightPointer--;
-      }
+    swap(data, middle, min);
+    left = min; 
+    right = max;
 
-      swap(array, leftPointer, rightPointer);
+    while (left < right){
+      while (left < right && data[left].compareTo(partitionElement) <= 0)
+        left++;
+      
+      while (data[right].compareTo(partitionElement) > 0)
+        right--;
+
+      if (left < right)
+        swap(data, left, right);
     }
 
-    swap(array, leftPointer, highIndex);
+    swap (data, min, right);
+    return right;
   }
 
   private static <T extends Comparable<T>> void swap(T[] data, int a, int b) {
